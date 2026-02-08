@@ -1,9 +1,8 @@
-from app.db.database import engine, Base
-from app.models.clothing_item import ClothingItem
+from backend.app.db.init_db import create_tables
 
-def create_tables():
-    Base.metadata.create_all(bind = engine)
+def start():
+    create_tables()
+    print("Database is ready!")
 
-if __name__ == "__main__":
-    create_tables
-    print("Database tables created")
+if __name__== "__main__":
+    start()
