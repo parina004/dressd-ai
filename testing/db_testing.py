@@ -6,10 +6,10 @@ db = SessionLocal()
 item = ClothingItem(
     category = "bottom",
     subtype = "skirt",
-    color = "black",
+    colour = "black",
     pattern = "plain",
     style = "denim",
-    length = "knee length",
+    length = "knee_length",
     tags =["cotton","casual"],
     image_path = "data/images/blackSkirt.jpg"
 )
