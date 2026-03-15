@@ -1,10 +1,10 @@
 from pydantic import BaseModel
 from typing import List,Optional
-
+from datetime import datetime
 class ClothingItemBase(BaseModel):
     category:str
     subtype:Optional[str] = None
-    color:Optional[str] = None
+    colour:Optional[str] = None
     pattern:Optional[str] = None
     style:Optional[str] = None
     length:Optional[str] = None
@@ -18,6 +18,6 @@ class ClothingItemCreate(ClothingItemBase):
 #used when returning clothing items to frontend
 class ClothingItemResponse(ClothingItemBase):
     id:int
-
+    created_at: datetime
     class Config:
         orm_mode=True
