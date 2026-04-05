@@ -6,34 +6,45 @@ from pathlib import Path
 
 load_dotenv(Path(__file__).resolve().parents[3] / ".env")
 
-vision_api = os.getenv("GOOGLE_VISION_API")
-print(vision_api)
-print("*****************************************")
+hf_token = os.getenv("HF_TOKEN")
+model_url = "https://router.huggingface.co/hf-inference/models/openai/clip-vit-base-patch32"
+
+headers = {"Authorization": f"Bearer {hf_token}"}
 
 def analyze_image(image_path):
+    import json
     content = open(image_path,"rb").read()
-
     #to send binary image data as plain text inside the json request body 
-    encoded = base64.b64encode(content).decode("utf-8")
+    encoded_img = base64.b64encode(content).decode("utf-8")
 
-    url = f"https://vision.googleapis.com/v1/images:annotate?key={vision_api}"
+    colour_labels = ["black", "white", "gray", "blue", "red", "green", "yellow", "brown", "beige", "pink", "purple", "orange"]
+    subtype_labels = ["shirt", "tshirt", "croptop", "hoodie", "kurti", "skirt", "pants", "leggings", "plazos","shorts", "mini_dress", "midi_dress", "maxi_dress", "heels", "boots", "sneakers", "sandals", "handbag", "belt"] 
+    pattern_labels = ["plain","striped","checked","floral","printed","graphic","denim","textured"]
+    style_labels = ["casual", "formal", "sporty", "streetwear", "party", "ethnic", "lounge"] 
+    length_labels = ["cropped", "short", "long", "knee_length", "full_length"]
 
-    body = {
-    "requests": [
-      {
-        "image": { "content": encoded },
-        "features": [
-          {"type": "LABEL_DETECTION", "maxResults": 10},
-          {"type": "IMAGE_PROPERTIES"}
-        ]
-      }
-    ]
-  }
+    label_list = [colour_labels,subtype_labels,pattern_labels,style_labels,length_labels]
+    response_list = []
 
-    response = requests.post(url, json=body)
-    result = response.json()
+    for label in label_list:
+        payload = {
+            "inputs" : encoded_img,
+            "parameters" : {
+                "candidate_labels":label
+            }
+        }
+        response = requests.post(model_url, headers=headers, json=payload)
+        print(response.status_code)
+        print(response.text)
 
-    return result
+    #     response_list.append(result[0])
+    #     print("\n")
+    
+    # print("response_list: ",response_list)
+    # print("\n")
+
+    # response_dict = {"colour":response_list[0]}
+    # print("response_dict:", response_dict)
 
 if __name__ == "__main__":
     import json

@@ -5,4 +5,4 @@ uvicorn
 python-multipart
 python-dotenv
 requests
-google-generativeai
+groq
