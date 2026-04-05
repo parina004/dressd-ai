@@ -3,5 +3,6 @@ sqlalchemy
 fastapi
 uvicorn
 python-multipart
-google-cloud-vision
 python-dotenv
+requests
+google-generativeai
