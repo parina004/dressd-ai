@@ -26,3 +26,15 @@ def delete_item(db,item_id):
         db.delete(item)
         db.commit()
         return item
+    
+def get_outfit_items(db,filters):
+    query = db.query(ClothingItem)
+
+    for field,value in filters.items():
+        if value is not None:
+            if isinstance(value, list):
+                query = query.filter(getattr(ClothingItem,field).in_(value))
+            if isinstance(value,str):
+                query = query.filter(getattr(ClothingItem,field) == value)
+
+    return query.all()
