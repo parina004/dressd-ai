@@ -40,3 +40,7 @@ def delete_clothing_item(
         raise HTTPException(status_code = 404, detail = "Item not found")
     else:
         return result
+
+@router.get("/tags")
+def get_all_tags(db: Session = Depends(get_db)):
+    return crud.get_all_tags(db)
