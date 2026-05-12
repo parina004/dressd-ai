@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
+
+@import "tailwindcss";
+
+:root {
+  --cream: #FAF6F0;
+  --blush-light: #F5E6EA;
+  --blush: #D4A0A7;
+  --rose: #A0606B;
+  --charcoal: #1A1614;
+  --warm-gray: #8B7E7A;
+  --border: #EDE4E1;
+  --gold: #B89A4A;
+  --warm-white: #FFFEF9;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--cream);
+  color: var(--charcoal);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+
+input, textarea, select, button {
+  font-family: 'DM Sans', sans-serif;
+}
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--blush); border-radius: 2px; }
+
+::selection { background: var(--blush-light); color: var(--charcoal); }

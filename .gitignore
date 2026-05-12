@@ -1,6 +1,10 @@
 #Specifics
 moreinfo/
 data/images/
+test_queries.txt
+wardrobe.db
+*.docx
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

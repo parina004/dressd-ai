@@ -1,4 +1,4 @@
-pydantic 
+pydantic
 sqlalchemy
 fastapi
 uvicorn
@@ -6,3 +6,4 @@ python-multipart
 python-dotenv
 requests
 groq
+aiofiles
